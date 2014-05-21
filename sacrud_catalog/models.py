@@ -15,7 +15,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class Product(Base):
+class BaseProduct(object):
     __tablename__ = 'product'
 
     id = Column(Integer, primary_key=True)
@@ -23,3 +23,21 @@ class Product(Base):
 
     def __repr__(self):
         return self.name
+
+
+class BaseCategory(object):
+    __tablename__ = 'category'
+
+    id = Column(Integer, primary_key=True)
+
+
+class BaseGroup(object):
+    __tablename__ = 'group'
+
+    id = Column(Integer, primary_key=True)
+
+
+class BaseStock(object):
+    __tablename__ = 'stock'
+
+    id = Column(Integer, primary_key=True)
