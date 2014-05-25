@@ -22,7 +22,7 @@ class Visible(object):
 
 
 class Category2Group(object):
-    __tablename__ = 'category2group'
+    __tablename__ = 'sacrud_catalog_category2group'
 
     @declared_attr
     def group_id(cls):
@@ -66,7 +66,7 @@ class BaseProduct(Visible):
         return self.name
 
 
-class BaseCategory(Visible):
+class BaseCategory(object):
     __tablename__ = 'sacrud_catalog_category'
 
     id = Column(Integer, primary_key=True)
@@ -76,7 +76,9 @@ class BaseCategory(Visible):
     # m2m to Group
     @declared_attr
     def group(cls):
-        return relationship("Category2Group")
+        return relationship("CatalogGroup",
+                            secondary="sacrud_catalog_category2group",
+                            backref="category")
 
 
 class BaseGroup(Visible):
