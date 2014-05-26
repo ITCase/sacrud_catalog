@@ -66,7 +66,7 @@ class BaseProduct(Visible):
         return self.name
 
 
-class BaseCategory(object):
+class BaseCategory(Visible):
     __tablename__ = 'sacrud_catalog_category'
 
     id = Column(Integer, primary_key=True)
