@@ -34,10 +34,6 @@ class Category2Group(object):
         return Column(Integer, ForeignKey('sacrud_catalog_category.id'),
                       primary_key=True)
 
-    @declared_attr
-    def category(cls):
-        return relationship("CatalogCategory", backref="category")
-
 
 class BaseProduct(Visible):
     """ JSON parameters
