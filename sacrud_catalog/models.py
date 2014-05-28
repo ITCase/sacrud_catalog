@@ -34,6 +34,10 @@ class Category2Group(object):
         return Column(Integer, ForeignKey('sacrud_catalog_category.id'),
                       primary_key=True)
 
+    @declared_attr
+    def m2m_category(cls):
+        return relationship("CatalogCategory", backref="m2m_category2group")
+
 
 class BaseProduct(Visible):
     """ JSON parameters
