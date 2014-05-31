@@ -39,6 +39,24 @@ class Category2Group(object):
         return relationship("CatalogCategory", backref="m2m_category2group")
 
 
+class Product2Category(object):
+    __tablename__ = 'sacrud_catalog_product2category'
+
+    @declared_attr
+    def product_id(cls):
+        return Column(Integer, ForeignKey('sacrud_catalog_product.id'),
+                      primary_key=True)
+
+    @declared_attr
+    def category_id(cls):
+        return Column(Integer, ForeignKey('sacrud_catalog_category.id'),
+                      primary_key=True)
+
+    @declared_attr
+    def m2m_product(cls):
+        return relationship("CatalogProduct", backref="m2m_product2category")
+
+
 class BaseProduct(Visible):
     """ JSON parameters
 
@@ -62,6 +80,13 @@ class BaseProduct(Visible):
 
     params = Column(JSON)
 
+    # m2m to Category
+    @declared_attr
+    def category(cls):
+        return relationship("CatalogCategory",
+                            secondary="sacrud_catalog_product2category",
+                            backref="product")
+
     def __repr__(self):
         return self.name
 
@@ -80,6 +105,9 @@ class BaseCategory(Visible):
                             secondary="sacrud_catalog_category2group",
                             backref="category")
 
+    def __repr__(self):
+        return self.name
+
 
 class BaseGroup(Visible):
     __tablename__ = 'sacrud_catalog_group'
@@ -91,6 +119,9 @@ class BaseGroup(Visible):
     params = Column(JSON)
 
     # m2m to Product
+
+    def __repr__(self):
+        return self.name
 
 
 class BaseStock(Visible):
