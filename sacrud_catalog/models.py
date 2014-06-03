@@ -9,10 +9,10 @@
 """
 Model of Pages
 """
-from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 
 Base = declarative_base()
 
@@ -36,7 +36,9 @@ class Category2Group(object):
 
     @declared_attr
     def m2m_category(cls):
-        return relationship("CatalogCategory", backref="m2m_category2group")
+        return relationship("CatalogCategory",
+                            backref=backref("m2m_category2group",
+                                            cascade="all, delete-orphan"))
 
 
 class Product2Category(object):
