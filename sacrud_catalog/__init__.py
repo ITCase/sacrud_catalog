@@ -7,7 +7,7 @@
 # Distributed under terms of the MIT license.
 __version__ = "0.0.1a"
 
-package = "sacrud_catalog"
+package = "pyramid_sacrud_catalog"
 
 
 def includeme(config):

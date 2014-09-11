@@ -4,10 +4,10 @@
 .settings
 .project
 .pydevproject
-sacrud_catalog/.coverage
-sacrud_catalog/TODO
+pyramid_sacrud_catalog/.coverage
+Pyramid_sacrud_catalog/TODO
 *.pyc
-sacrud_catalog/cover
+pyramid_sacrud_catalog/cover
 cover
 .coverage
 build
