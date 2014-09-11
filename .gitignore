@@ -4,6 +4,7 @@
 .settings
 .project
 .pydevproject
+.ropeproject
 pyramid_sacrud_catalog/.coverage
 Pyramid_sacrud_catalog/TODO
 *.pyc
