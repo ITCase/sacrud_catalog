@@ -23,6 +23,7 @@ class Visible(object):
 
 class Category2Group(object):
     __tablename__ = 'sacrud_catalog_category2group'
+    verbose_name = u'category2group'
 
     @declared_attr
     def group_id(cls):
@@ -43,6 +44,7 @@ class Category2Group(object):
 
 class Product2Category(object):
     __tablename__ = 'sacrud_catalog_product2category'
+    verbose_name = u'product2category'
 
     @declared_attr
     def product_id(cls):
@@ -61,6 +63,7 @@ class Product2Category(object):
 
 class Product2Group(object):
     __tablename__ = 'sacrud_catalog_product2group'
+    verbose_name = u'product2group'
 
     @declared_attr
     def product_id(cls):
@@ -94,6 +97,7 @@ class BaseProduct(Visible):
             }
     """
     __tablename__ = 'sacrud_catalog_product'
+    verbose_name = u'product'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -120,6 +124,7 @@ class BaseProduct(Visible):
 
 class BaseCategory(Visible):
     __tablename__ = 'sacrud_catalog_category'
+    verbose_name = u'category'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -138,6 +143,7 @@ class BaseCategory(Visible):
 
 class BaseGroup(Visible):
     __tablename__ = 'sacrud_catalog_group'
+    verbose_name = u'group'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -153,6 +159,7 @@ class BaseGroup(Visible):
 
 class BaseStock(Visible):
     __tablename__ = 'sacrud_catalog_stock'
+    verbose_name = u'stock'
 
     id = Column(Integer, primary_key=True)
     qty = Column(Integer)
