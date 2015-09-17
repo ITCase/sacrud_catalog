@@ -6,6 +6,6 @@
 #
 # Distributed under terms of the MIT license.
 
-"""
-Views for sacrud_catalog
-"""
+
+def includeme(config):
+    config.scan()
