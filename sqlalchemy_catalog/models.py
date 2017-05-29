@@ -9,8 +9,9 @@
 """
 Model of Pages
 """
+# SQLAlchemy
 from sqlalchemy import Column, String, Boolean, Integer, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
 from sqlalchemy.dialects.postgresql import JSONB
 
@@ -23,7 +24,6 @@ class Visible(object):
 
 class BaseProduct2Group(object):
     __tablename__ = 'sacrud_catalog_product2group'
-    verbose_name = u'product2group'
 
     @declared_attr
     def product_id(cls):
@@ -42,17 +42,30 @@ class BaseProduct2Group(object):
         )
 
     @declared_attr
-    def m2m_product(cls):
+    def product(cls):
         return relationship(
             "CatalogProduct",
-            backref="m2m_product2group"
+            backref=backref(
+                "m2m_product2group",
+                cascade="all, delete-orphan"
+            )
+        )
+
+    @declared_attr
+    def group(cls):
+        return relationship(
+            "CatalogGroup",
+            backref=backref(
+                "m2m_product2group",
+                cascade="all, delete-orphan"
+            )
         )
 
 
 class BaseProduct(Visible):
     """ JSONB parameters
 
-        format:
+        Example:
             {"size": {"type": "list",
                       "value": (39, 40, 41, 42, 43, 44)
                      },
@@ -66,7 +79,6 @@ class BaseProduct(Visible):
             }
     """
     __tablename__ = 'sacrud_catalog_product'
-    verbose_name = u'Products'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -79,7 +91,6 @@ class BaseProduct(Visible):
 
 class BaseGroup(Visible):
     __tablename__ = 'sacrud_catalog_group'
-    verbose_name = u'Groups'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -93,7 +104,7 @@ class BaseGroup(Visible):
         return relationship(
             "CatalogProduct",
             secondary="sacrud_catalog_product2group",
-            backref="groups"
+            backref="groups",
         )
 
     def __repr__(self):
@@ -102,7 +113,6 @@ class BaseGroup(Visible):
 
 class BaseStock(Visible):
     __tablename__ = 'sacrud_catalog_stock'
-    verbose_name = u'Stock'
 
     id = Column(Integer, primary_key=True)
     qty = Column(Integer, nullable=False)
